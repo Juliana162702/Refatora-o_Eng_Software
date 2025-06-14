@@ -1,6 +1,7 @@
 # Sistema de Gerenciamento de Projetos
 
-![Diagrama de Classes](./out/documento/diagrama/GerenciadorProjetos.png)
+![Diagrama de Classes](docs/imag/GerenciadorProjetos.png)
+
 
 Um sistema completo para gerenciamento de projetos, times e tarefas, seguindo padrões de arquitetura limpa e boas práticas de desenvolvimento.
 
