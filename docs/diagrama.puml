@@ -1,0 +1,67 @@
+## Diagrama de Classes
+
+```plantuml
+@startuml GerenciadorProjetos
+
+class GerenciadorProjetos {
+  - _projetos: List[Projeto]
+  - _membros: List[Membro]
+  - _tarefas: List[Tarefa]
+  + projetos: List[Projeto] {readonly}
+  + membros: List[Membro] {readonly}
+  + tarefas: List[Tarefa] {readonly}
+  + adicionar_projeto(projeto: Projeto): void
+  + cadastrar_membro(membro: Membro): void
+  + buscar_projeto(nome: str): Projeto
+  + buscar_membro(nome: str): Membro
+  + criar_tarefa(): Tarefa
+  + concluir_tarefa(): void
+  + relatorio_projeto(): Dict
+  + relatorio_membro(): Dict
+}
+
+class Projeto {
+  - nome: str
+  - descricao: str
+  - prazo_final: date
+  - data_inicio: date
+  - membros: List[Membro]
+  - tarefas: List[Tarefa]
+  + adicionar_membro(membro: Membro): void
+  + criar_tarefa(): Tarefa
+  + calcular_atraso(): int
+}
+
+class Membro {
+  - nome: str
+  - funcao: str
+  - email: str
+  - tarefas_atribuidas: List[Tarefa]
+  + adicionar_tarefa(tarefa: Tarefa): void
+  + remover_tarefa(tarefa: Tarefa): void
+}
+
+class Tarefa {
+  - titulo: str
+  - descricao: str
+  - responsavel: Membro
+  - prazo: date
+  - prioridade: int
+  - status: str
+  - data_criacao: date
+  + iniciar(): void
+  + concluir(): void
+  + esta_atrasada(): bool
+}
+
+' Relacionamentos
+GerenciadorProjetos "1" *-- "0..*" Projeto
+GerenciadorProjetos "1" *-- "0..*" Membro
+GerenciadorProjetos "1" *-- "0..*" Tarefa
+
+Projeto "1" *-- "0..*" Tarefa
+Projeto "1" *-- "0..*" Membro
+
+Membro "1" -- "0..*" Tarefa
+
+@enduml
